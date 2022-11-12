@@ -1,8 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Animated, Text, Dimensions} from 'react-native';
+import { View, StyleSheet, Animated, Text, Dimensions, Image, TextInput } from "react-native";
 import Lottie from 'lottie-react-native';
 
 const {height, width} = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ea5430',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  lottie: {
+    flex: 1,
+    backgroundColor: '#ea5430',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 23,
+    fontWeight: '800',
+  },
+});
 
 const Animation = () => {
   return <Lottie source={require('./src/splash.json')} autoPlay loop />;
@@ -13,7 +32,7 @@ const App = () => {
   const width = new Animated.Value(0);
   const height = new Animated.Value(0);
 
-  const IMAGE = './src/Logo_1.png';
+  const Image = './src/Logo_1.png';
 
   useEffect(() => {
     Animated.timing(width, {
@@ -42,7 +61,7 @@ const App = () => {
 
   const Splash_Screen = () => {
     return (
-      <View style={styles.container}>
+      <View style={styles.lottie}>
         <Animation />
       </View>
     );
@@ -55,25 +74,19 @@ const App = () => {
       ) : (
         <View style={styles.container}>
           <Text style={styles.title}>
-            Fait avec React Native sur Webstorm :)
+            <TextInput
+              style={{
+                width: '62.5%',
+                height: 40,
+              }}
+              placeholderTextColor={959595}
+              placeholder="test"
+            />
           </Text>
         </View>
       )}
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 23,
-    fontWeight: '800',
-  },
-});
 
 export default App;
