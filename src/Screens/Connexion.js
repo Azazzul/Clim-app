@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import Inscription from './Inscription';
 
 const Connexion = ({setUserState}) => {
   const [isRegister, setRegister] = useState(true);
