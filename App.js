@@ -1,6 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import { View, StyleSheet, Animated, Text, Dimensions, Image, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Animated,
+  Text,
+  Dimensions,
+  TextInput,
+  Image,
+} from 'react-native';
 import Lottie from 'lottie-react-native';
+import Connexion from './src/Screens/Connexion';
 
 const {height, width} = Dimensions.get('window');
 
@@ -18,8 +27,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    color: '#FFF',
     fontSize: 23,
     fontWeight: '800',
+  },
+  input: {
+    width: '70%',
+    height: 40,
+    backgroundColor: '#FFF',
+    paddingLeft: 10,
+    borderRadius: 4,
+    marginBottom: 17,
+  },
+  logo: {
+    maxWidth: '58%',
+    resizeMode: 'contain',
+    marginBottom: 0,
   },
 });
 
@@ -27,12 +50,11 @@ const Animation = () => {
   return <Lottie source={require('./src/splash.json')} autoPlay loop />;
 };
 const App = () => {
-  const [isVisible, setisVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const [user, setUser] = useState('');
 
   const width = new Animated.Value(0);
   const height = new Animated.Value(0);
-
-  const Image = './src/Logo_1.png';
 
   useEffect(() => {
     Animated.timing(width, {
@@ -46,10 +68,10 @@ const App = () => {
       duration: 1200,
       useNativeDriver: false,
     }).start();
-  }, []);
+  }, [height, width]);
 
   const Hide_Splash_Screen = () => {
-    setisVisible(false);
+    setIsVisible(false);
   };
 
   useEffect(() => {
@@ -67,23 +89,22 @@ const App = () => {
     );
   };
 
+  const setUserState = state => {
+    setUser(state);
+  };
+
   return (
     <>
       {isVisible === true ? (
         Splash_Screen()
       ) : (
-        <View style={styles.container}>
-          <Text style={styles.title}>
-            <TextInput
-              style={{
-                width: '62.5%',
-                height: 40,
-              }}
-              placeholderTextColor={959595}
-              placeholder="test"
-            />
-          </Text>
-        </View>
+        <>
+          {user === '' ? (
+            <Connexion setUserState={setUserState} />
+          ) : (
+            <Text> user </Text>
+          )}
+        </>
       )}
     </>
   );
